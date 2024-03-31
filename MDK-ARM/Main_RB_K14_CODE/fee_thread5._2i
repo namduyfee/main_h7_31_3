@@ -1,0 +1,6 @@
+--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot
+-I.\RTE\_Main_RB_K14_CODE
+-IC:\Users\kha\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include
+-IC:\Users\kha\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include
+-D__UVISION_VERSION="532" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx
+-o main_rb_k14_code\fee_thread5.o --omf_browse main_rb_k14_code\fee_thread5.crf --depend main_rb_k14_code\fee_thread5.d --feedback "Main_RB_K14_CODE\Main_RB_K14_CODE.fed" "..\Robot\FEE_Thread5.c"

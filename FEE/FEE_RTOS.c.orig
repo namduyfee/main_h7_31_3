@@ -1,0 +1,146 @@
+/*******************************    INCLUDES   ********************************/
+
+#include "FEE_RTOS.h"
+#include "main.h"
+#include "usbd_customhid.h"
+#include "FEE_USB.h"
+#include "FEE_ADC.h"
+#include "FEE_EXTI.h"
+#include "FEE_GPIO.h"
+#include "FEE_PWM.h"
+#include "FEE_SPI.h"
+#include "FEE_LCD.h"
+#include "FEE_UART.h"
+#include "FEE_PES_Control.h"
+#include "FEE_Compass.h"
+#include "FEE_SWERVE_DRIVER.h"
+#include "FEE_AT24C128.h"
+#include "FEE_Kalman_Filter.h"
+#include "DEV_Config.h"
+#include "LCD_1in69.h"
+#include "GUI_Paint.h"
+#include "image.h"
+#include "FEE_STM32F103C8T6.h"
+#include "FEE_Absolute_Encoder.h"
+
+
+#define FEE_GPIOIn  FEE.H_GPIO
+
+/***************************    GLOBAL VARIABLES   ****************************/
+
+USBD_HandleTypeDef 				    *pdev1;
+USBD_CUSTOM_HID_HandleTypeDef       *hhid1;
+
+struct FEE_def		    FEE;
+int i = 0;
+int EncoderCount = 0;
+char EncoderVal =0;
+int EncoderCount1 = 0;
+char EncoderVal1 =0;
+extern FEE_Compass_struct_def Compass1;
+extern FEE_Compass_struct_def Compass2;
+/***************************       FUNCTIONS       ****************************/
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if(GPIO_Pin==GPIO_PIN_0)
+    {
+        FEE_GPIOIn.EXTI_Counter1++;
+    }
+    if(GPIO_Pin==GPIO_PIN_1)
+    {
+        FEE_GPIOIn.EXTI_Counter2++;
+    }
+    if(GPIO_Pin==GPIO_PIN_2)
+    {
+        FEE_GPIOIn.EXTI_Counter3++;
+    }
+    if(GPIO_Pin==GPIO_PIN_3)
+    {
+        FEE_GPIOIn.EXTI_Counter4++;
+    }
+    if(GPIO_Pin==GPIO_PIN_4||GPIO_Pin==GPIO_PIN_5)
+    {
+        int Array1[16] = {0,-1,1,0,1,0,0,-1,-1,0,0,1,0,1,-1,0};
+        char A = HAL_GPIO_ReadPin(GPIOD,GPIO_PIN_4);
+        char B = HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_5);
+        EncoderVal = EncoderVal<<2;
+        EncoderVal = ((A<<1)|B|EncoderVal)&0x0f;
+        EncoderCount += Array1[EncoderVal];
+        FEE_GPIOIn.EXTI_Counter7 = EncoderCount/4;
+
+    }
+    if(GPIO_Pin==GPIO_PIN_6||GPIO_Pin==GPIO_PIN_9)
+    {
+        int Array1[16] = {0,-1,1,0,1,0,0,-1,-1,0,0,1,0,1,-1,0};
+        char A = HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_6);
+        char B = HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_9);
+        EncoderVal1 = EncoderVal1<<2;
+        EncoderVal1 = ((A<<1)|B|EncoderVal1)&0x0f;
+        EncoderCount1 += Array1[EncoderVal1];
+        FEE_GPIOIn.EXTI_Counter8 = EncoderCount1/4;
+    }
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if(huart->Instance == USART1) // C8T6
+    {
+        FEE_STM32C8T6_Read();
+    }
+
+    if(huart->Instance == USART2) // PES
+    {
+        pes_uart_event_handle();
+    }
+
+    if(huart->Instance == USART3) // ComPass1
+    {
+        FEE_Compass_Process(&Compass1);
+    }
+    
+    if(huart->Instance == USART6) // ComPass2
+    {
+        FEE_Compass_Process(&Compass2);
+    }
+}
+
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+{
+
+}
+
+void FEE_Data_Innit(void)
+{
+    FEE.UART_Update 		= 0;
+    FEE.UART_Loss 			= 0;
+
+    FEE.Process_Mode		= 0;
+    FEE.Process_done		= 0;
+    FEE.Request_Save_Flash	= 0;
+    FEE.Request_Read_Flash	= 0;
+
+    FEE.Pulse 				= 0;
+    FEE.Buff_Duty 			= 0;
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
+{
+
+}
+
+void FEE_RTOS_Innit(void)
+{
+    FEE_LCD_Innit();
+    FEE_Data_Innit();
+    FEE_ADC_Innit();
+    FEE_USB_Innit();
+    FEE_EXTI_Innit();
+    FEE_GPIO_Innit();
+//	FEE_PWM_Innit();
+    FEE_SPI_Innit();
+    FEE_UART_Innit();
+    HAL_Delay(100);
+}
+
+

@@ -1,0 +1,76 @@
+#ifndef		__FEE_ROBOT_H__
+#define		__FEE_ROBOT_H__
+
+/*******************************    INCLUDES   ********************************/
+#include "main.h"
+#include "stdlib.h"
+#include "math.h"
+/***************************    GLOBAL VARIABLES   ****************************/
+
+extern struct FEE_RTOS_struct_def           FEE_RTOS_struct;
+extern struct AngleInfo result;
+/***************************       FUNCTIONS       ****************************/
+
+int  Limit(int VT_RAW, int VTG);
+
+int  tinh_he_so(int goc_can_lay, int van_toc_goc, float Kp, float Ki, float Kd);
+
+int  gia_toc(int van_toc_can);
+
+void tang_toc(void);
+
+void di_chuyen(int van_toc_tinh_tien, int goc_tinh_tien, int van_toc_goc, int goc_quay, float Kp, float Ki, float Kd,unsigned int tang,unsigned int giam);
+
+void FEE_Robot_Innit(void);
+
+void Stop_PID(void);
+void _Robot_4_omini (uint16_t Van_toc_Chay, int Goc_Chay, uint8_t Van_toc_Xoay, int Goc_Xoay, float HS_Goc,float HS_tang_goc, uint8_t V_tang, uint8_t V_giam);
+void _Robot_cua(uint16_t V_chay,int Goc_chay,float HS_Goc,float HS_tang_goc, uint8_t V_tang, uint8_t V_giam);
+void DC_PWM1(uint8_t chieu, uint8_t toc_do);
+void DC_PWM2(uint8_t chieu, uint8_t toc_do);
+void DC_PWM3(uint8_t chieu, uint8_t toc_do);
+void DC_PWM4(uint8_t chieu, uint8_t toc_do);
+void Auto_lv(void);
+void Goc_ban(uint8_t goc);
+int songSongThanh(int adc_kc_thanh,int adc_ht,int sai_so_adc,int goc_chay,int sai_so,int chieu); 
+int TocDoen(int v0, int v1, int vmax,int quangduonght, uint16_t quangDuongCanDen, int phanTramTangToc, int phanTramGiamToc);
+uint16_t tocdo_1(uint16_t en, uint16_t toc_do_thap,uint16_t toc_do_cao,uint16_t quang_duong,uint16_t quang_duong_tang,uint16_t quang_duong_giam);
+void stop_sw(int banh1,int banh2,int banh3,int toc_do);
+int tinh_goc_xoay(int goc_can_lay, int van_toc_goc);
+void omi4Banh(int van_toc_tinh_tien, int goc_tinh_tien, int van_toc_goc, int goc_quay,int tang,int giam);
+int G_SS_Run(int G_Run, int ADC_RUn, int ADC_Now, float HS_Goc, int Bu_G_Max);
+int TocDo1(int v0, int v1, int vmax,int viTriHtai,int viTriGoc, int quangDuongCanDen, int phanTramTangToc, int phanTramGiamToc);
+int G_SS_Run_2(int G_Run, int ADC_Run, int ADC_Now, float HS_Goc, int Bu_G_Max);
+void xoay_dc1(int goc_banh,float toc_do);
+void xoay_dc2(int goc_banh,float toc_do);
+void xoay_dc3(int goc_banh,float toc_do);
+void xoay_dc4(int goc_banh,float toc_do);
+void convert_to_pod_control(double v_B_total[3], double *speed3, double *angle3);
+void calculate_velocity_from_angle(double angle2, double speed2, double v_B_total[3]) ;
+void convert_to_drive_speed_and_angle(float speed, float angle_deg, float *drive_speed, float *drive_angle_deg);
+void calculate_wheel_angles(float rotationAngle, float wheelAngles[4]);
+void calculate_swerve_drive(float translationSpeed, float translationAngle, float rotationAngle,
+                            float wheelSpeeds[4], float wheelAngles[4]) ;
+void calculate_wheel_speeds(float translationSpeed, float translationAngle, float rotationAngle, float sensorAngle, float wheelSpeeds[4]) ;
+void convert_to_wheel_controls(float wheelSpeeds[4], float *speeds, float *angles);
+double closestAngle(double a, double b);
+double modulo(double a, double b);
+void translateTurn(double direction, double translatePower, double turnPower);
+int chieu_quay(int goc_xd,int goc_tru);
+void setDirection(double Goc_chay,double Van_toc_chay,double Goc_xoay,double Van_toc_goc,double HS);
+void goc_gan_nhat(struct AngleInfo *result,int goc_htai,int goc_moi,int xd_angle);
+void setDirection1(double Goc_chay,double Van_toc_chay,double Goc_xoay,double Van_toc_goc,double HS);
+int tinh_ss_goc(int goc_nhap);
+void vegoc0(int chieu);
+void vegoc03();
+void xoay_tron(int chieu, int toc_do);
+void xoaytron01(int huong_chay,int toc_do);
+void xoaytron02(int huong_chay,int toc_do);
+void xoaytron03(int huong_chay,int toc_do);
+void ve_vt();
+int ss_goc_bu(int huong_xet);
+void Swerve_4(int huong_chay,int toc_do,int goc_xoay,float L,float W,int tang,int giam,int HS);
+void Swerve_3(int huong_chay,int toc_do,int goc_xoay,int toc_do_xoay,float L,float W,int tang,int giam,int HS);
+void delay(int d);
+void stop_sw(int banh1,int banh2,int banh3,int toc_do);
+#endif

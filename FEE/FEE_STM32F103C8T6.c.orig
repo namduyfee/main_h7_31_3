@@ -1,0 +1,109 @@
+#include "FEE_STM32F103C8T6.h"
+
+extern struct FEE_RTOS_struct_def	FEE_RTOS_struct;
+extern	ADC_HandleTypeDef hadc1;
+extern	DMA_HandleTypeDef hdma_adc1;
+
+extern	I2C_HandleTypeDef hi2c1;
+extern	I2C_HandleTypeDef hi2c2;
+
+extern	SPI_HandleTypeDef hspi1;
+
+extern	TIM_HandleTypeDef htim2;
+extern	TIM_HandleTypeDef htim3;
+extern	TIM_HandleTypeDef htim4;
+
+extern	UART_HandleTypeDef huart4;
+extern	UART_HandleTypeDef huart5;
+extern	UART_HandleTypeDef huart7;
+extern	UART_HandleTypeDef huart8;
+extern	UART_HandleTypeDef huart1;
+extern	UART_HandleTypeDef huart2;
+extern	UART_HandleTypeDef huart3;
+extern	UART_HandleTypeDef huart6;
+extern	DMA_HandleTypeDef hdma_uart4_rx;
+extern	DMA_HandleTypeDef hdma_uart5_rx;
+extern	DMA_HandleTypeDef hdma_uart7_rx;
+extern	DMA_HandleTypeDef hdma_uart8_rx;
+extern	DMA_HandleTypeDef hdma_usart1_rx;
+extern	DMA_HandleTypeDef hdma_usart2_rx;
+extern	DMA_HandleTypeDef hdma_usart3_rx;
+extern	DMA_HandleTypeDef hdma_usart6_rx;
+
+int pc8 = 0;
+
+void FEE_STM32F103C8T6_Innit(void)
+{
+	for(pc8 = 0; pc8 < 64; pc8++)
+	{
+		FEE_RTOS_struct.H_STM32C8T6.rxBuffer[pc8] = 0;
+		FEE_RTOS_struct.H_STM32C8T6.txBuffer[pc8] = 0;
+		FEE_RTOS_struct.H_STM32C8T6.DMA_rxBuffer[pc8] = 0;
+	}
+	
+		FEE_RTOS_struct.H_STM32C8T6.RX_size = 0;
+		FEE_RTOS_struct.H_STM32C8T6.RX_Done = 0;
+		FEE_RTOS_struct.H_STM32C8T6.TX_size = 0;
+		FEE_RTOS_struct.H_STM32C8T6.TX_Done = 0;
+		FEE_RTOS_struct.H_STM32C8T6.Disconnect = 0;
+		
+		FEE_RTOS_struct.H_STM32C8T6.CMD1 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD2 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD3 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD4 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD5 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD6 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD7 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD8 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD9 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD10 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD11 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD12 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD13 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD14 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD15 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD16 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD17 = 0;
+		FEE_RTOS_struct.H_STM32C8T6.CMD18 = 0;
+}
+
+void FEE_STM32C8T6_Read(void)
+{
+		for(pc8 = 0; pc8 < 20; pc8++)
+		{
+		FEE_RTOS_struct.H_STM32C8T6.rxBuffer[pc8] = FEE_RTOS_struct.H_UART1.DMA_rxBuffer[pc8];
+		}
+		FEE_RTOS_struct.H_STM32C8T6.RX_Done = 1;
+		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_3);
+		
+		// tiep tuc nhan du lieu
+		HAL_UART_Receive_IT(&huart1, FEE_RTOS_struct.H_UART1.DMA_rxBuffer, 20); 
+		//HAL_UART_Receive_IT(&huart1, FEE_RTOS_struct.H_UART1.DMA_rxBuffer, 20);
+}
+
+void FEE_STM32C8T6_Send(void)
+{
+	// ban tin dieu khien GPIO : stm32f103c8t6
+	FEE_RTOS_struct.H_UART1.txBuffer[0] = 'F';
+	FEE_RTOS_struct.H_UART1.txBuffer[1] = 'E';
+	FEE_RTOS_struct.H_UART1.txBuffer[2] = 'E';
+	FEE_RTOS_struct.H_UART1.txBuffer[3] = FEE_RTOS_struct.H_GPIO.GPIO_S22_S29;
+	FEE_RTOS_struct.H_UART1.txBuffer[4] = FEE_RTOS_struct.H_GPIO.GPIO_S30_S37;
+	FEE_RTOS_struct.H_UART1.txBuffer[5] = FEE_RTOS_struct.H_STM32C8T6.CMD1;
+	FEE_RTOS_struct.H_UART1.txBuffer[6] = FEE_RTOS_struct.H_STM32C8T6.CMD2;
+	FEE_RTOS_struct.H_UART1.txBuffer[7] = FEE_RTOS_struct.H_STM32C8T6.CMD3;
+	FEE_RTOS_struct.H_UART1.txBuffer[8] = FEE_RTOS_struct.H_STM32C8T6.CMD4;
+	FEE_RTOS_struct.H_UART1.txBuffer[9] = FEE_RTOS_struct.H_STM32C8T6.CMD5;
+	FEE_RTOS_struct.H_UART1.txBuffer[10] = FEE_RTOS_struct.H_STM32C8T6.CMD6;
+	FEE_RTOS_struct.H_UART1.txBuffer[11] = FEE_RTOS_struct.H_STM32C8T6.CMD7;
+	FEE_RTOS_struct.H_UART1.txBuffer[12] = FEE_RTOS_struct.H_STM32C8T6.CMD8;
+	FEE_RTOS_struct.H_UART1.txBuffer[13] = FEE_RTOS_struct.H_STM32C8T6.CMD9;
+	FEE_RTOS_struct.H_UART1.txBuffer[14] = FEE_RTOS_struct.H_STM32C8T6.CMD10;
+	FEE_RTOS_struct.H_UART1.txBuffer[15] = FEE_RTOS_struct.H_STM32C8T6.CMD11;
+	FEE_RTOS_struct.H_UART1.txBuffer[16] = FEE_RTOS_struct.H_STM32C8T6.CMD12;
+	FEE_RTOS_struct.H_UART1.txBuffer[17] = FEE_RTOS_struct.H_STM32C8T6.CMD13;
+	FEE_RTOS_struct.H_UART1.txBuffer[18] = FEE_RTOS_struct.H_STM32C8T6.CMD14;
+	FEE_RTOS_struct.H_UART1.txBuffer[19] = FEE_RTOS_struct.H_STM32C8T6.CMD15;
+	
+	HAL_UART_Transmit(&huart1, FEE_RTOS_struct.H_UART1.txBuffer, 20, 20);
+}

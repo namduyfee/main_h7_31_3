@@ -1,0 +1,732 @@
+/*******************************    INCLUDES   ********************************/
+
+#include "FEE_Robot.h"
+#include "FEE_LCD.h"
+#include "dwt_stm32_delay.h"
+#include "stdio.h"
+#include "math.h"
+//#include "usbd_customhid.h"
+
+/*******************************    DEFINITONS   ******************************/
+
+//#define PI 3.141592654
+//extern USBD_HandleTypeDef 			        *pdev1;
+//extern USBD_CUSTOM_HID_HandleTypeDef        *hhid1;
+/***************************    GLOBAL VARIABLES   ****************************/
+extern FEE_MOTOR DC1, DC2, DC3, DC4, DC5, DC6, DC7, DC8, DC9, DC10;
+extern int EncoderCount1;
+int van_toc_thuc=0;
+int van_toc=0;
+//int16_t v_quay=0;
+uint8_t ktra_khoa=0;
+uint16_t vt1;
+uint16_t vt;
+extern uint8_t mode;
+int PWMA=0,PWMB=0,PWMC=0,PWMD=0;
+int8_t chieu1=0,chieu2=0,chieu3=0,chieu4=0;
+extern char String_LCD[30];
+uint8_t Start=0;
+double huong_bx1,huong_bx2,huong_bx3,huong_bx4;
+struct AngleInfo {
+    double chieu_xoay;
+    double goc_xoay;
+	  uint8_t chieu_tinh_tien;
+};
+
+struct AngleInfo result;
+int goc_htaiA,goc_htaiB,goc_htaiC,goc_htaiD;
+double chieu_dc1,chieu_dc2,chieu_dc3,chieu_dc4,goc_dc1,goc_dc2,goc_dc3,goc_dc4;
+double dir ;
+double z;
+int x,y;
+int AngleA,AngleB,AngleC,AngleD;
+int goc_banh_cuoi;
+int sai_so_gocc,sai_so_gocc1;
+int dem;
+int goc_banh1;
+int xd_ssg;
+int ti_le_goc;
+int goc_xoay_1,goc_chay_1;
+uint8_t mode1;
+uint32_t chuyen_goc;
+uint8_t che_do_xoay;
+int huong1,huong2,huong3,huong4;
+int goc_banh_thuc;
+int xd_chieu_xoay;
+int chieu_thuc=0;
+int test,GT_angle;
+int chieu_tt1=1,chieu_tt2=1,chieu_tt3=0,chieu_tt4;
+int van_toc_goc_1;
+
+int angle_t;
+float speed[4];
+int speed_thuc[4];
+int Angle1,Angle2,Angle3,Angle4;
+int va,vb,vc,vd;
+float R,A,B,C,D,max,E;
+int SS_angle=0;
+int mode_dc1,mode_dc2,mode_dc3=0;
+int mau[50];
+int data_sick_old, data_sick_new;
+uint8_t i_count = 0;
+int sum_adc = 0;
+
+
+/***************************       FUNCTIONS       ****************************/
+float _RB_4OM_V_Quay_thuc=0;
+int _RB_4OM_van_toc_thuc=0;
+int k;
+int G_SS_Run(int G_Run, int ADC_RUn, int ADC_Now, float HS_Goc, int Bu_G_Max)
+{
+    int SS_ADC=(-ADC_Now+ADC_RUn)/100;
+    int G_Run_Tinh =  SS_ADC*HS_Goc;
+    if(G_Run_Tinh>Bu_G_Max) {return G_Run+Bu_G_Max;}
+    else if (G_Run_Tinh<-Bu_G_Max) {return G_Run-Bu_G_Max;}
+    else return G_Run+G_Run_Tinh;
+}
+
+int G_SS_Run_2(int G_Run, int ADC_Run, int ADC_Now, float HS_Goc, int Bu_G_Max)
+{
+    int SS_ADC=(-ADC_Run+ADC_Now)/100;
+    int G_Run_Tinh =  SS_ADC*HS_Goc;
+    if(G_Run_Tinh>Bu_G_Max) {return G_Run+Bu_G_Max;}
+    else if (G_Run_Tinh<-Bu_G_Max) {return G_Run-Bu_G_Max;}
+    else return G_Run+G_Run_Tinh;
+}
+
+int Limit(int VT_RAW, int VTG)
+{
+  if ( VT_RAW > VTG )   VT_RAW=VTG;
+  else if ( VT_RAW < -VTG )  VT_RAW=-VTG;
+  else return VT_RAW;
+}
+
+
+void Stop_PID()
+{
+        _RB_4OM_van_toc_thuc=0;
+		DC1.Dir = 0; DC1.Speed = 2;
+		DC2.Dir = 1; DC2.Speed = 2;
+		DC3.Dir = 1; DC3.Speed = 2;
+		DC4.Dir = 0; DC4.Speed = 2;
+        mode=0;
+}
+
+void DC_PWM1(uint8_t chieu, uint8_t toc_do)
+{
+     HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,chieu); //DIR1
+     __HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1, toc_do*4);
+}
+
+void DC_PWM2(uint8_t chieu, uint8_t toc_do)
+{
+     HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,chieu); //DIR2
+     __HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2, toc_do*4);
+}
+
+void DC_PWM3(uint8_t chieu, uint8_t toc_do)
+{
+     HAL_GPIO_WritePin(GPIOC,GPIO_PIN_9,chieu); //DIR3
+     __HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3, toc_do*4);
+}
+
+void DC_PWM4(uint8_t chieu, uint8_t toc_do)
+{
+     HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,chieu); //DIR4
+     __HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_4, toc_do*4);
+}
+
+void FEE_Robot_Innit(void)
+{
+    Start=1;
+}
+
+
+int songSongThanh(int adc_kc_thanh,int adc_ht,int sai_so_adc,int goc_chay,int sai_so,int chieu)
+{  
+	//debug_adc_ht = adc_ht;
+	int khoang_cach_adc= adc_ht-adc_kc_thanh;
+    if(khoang_cach_adc>=0)          khoang_cach_adc=khoang_cach_adc/sai_so_adc;
+    else if( khoang_cach_adc<=0)    khoang_cach_adc=-khoang_cach_adc/sai_so_adc;
+    
+    if(chieu==0)
+    {
+	if(adc_ht>adc_kc_thanh){k=goc_chay+(khoang_cach_adc);}
+	if(adc_ht<adc_kc_thanh){k=goc_chay-(khoang_cach_adc);}	
+    }
+    if(chieu==1)
+    {
+	if(adc_ht<adc_kc_thanh){k=goc_chay+(khoang_cach_adc);}
+	if(adc_ht>adc_kc_thanh){k=goc_chay-(khoang_cach_adc);}	
+    }
+    if(k>goc_chay+sai_so) {return k=goc_chay+sai_so;}
+    else if (k<goc_chay-sai_so) {return k=goc_chay-sai_so;}
+    else return k;
+  
+}
+
+
+//int kalman_filter_v1(int adc) {
+//	   int data[50];
+//	   int Di[50],do_lech, delta1 = 0,delta2 = 0;
+//	   mau[i_count] = adc*10;
+//	   Di[i_count]  = adc;  
+//	   sum_adc+=mau[i_count];
+//	   if(i_count == 50) {
+//			 data_sick_new =(int)((1/( float)i_count)*sum_adc);
+//			 i_count = 0;
+//			 sum_adc = 0;
+//			// return data_sick_new;
+//			 for(uint8_t i = 0; i < 50; i++) {
+//				  Di[i] =abs(Di[i] - data_sick_new);
+//				 sum_adc = pow(Di[i],2);
+//			 }
+//			 do_lech = sqrt(sum_adc);
+//			 sum_adc = 0;
+//		   delta1 = data_sick_new + do_lech;
+//			 delta2 = data_sick_new - do_lech;
+//			 for(uint8_t i = 0; i < 50; i++) {
+//				 if(delta1 <= mau[i] &&delta2 >= mau[i] ) {
+//					  data[i_count] = mau[i];
+//					 i_count++;
+//					 sum_adc +=data[i_count];
+//				 }
+//				 data_sick_new =(int)((1/( float)i_count)*sum_adc);
+//				 i_count = 0;
+//				 sum_adc = 0;
+//				}
+//			 return data_sick_new;
+//			 
+//		 }
+//		 i_count++;
+//		 data_sick_old = data_sick_new;
+//		 return data_sick_old;
+//	   
+//}
+
+//int kalman_filter(int adc) {
+//	   mau[i_count] = adc*10;  
+//	   sum_adc+=mau[i_count];
+//	   if(i_count == 50) {
+//			 data_sick_new =(int)((1/( float)i_count)*sum_adc);
+//			 i_count = 0;
+//			 sum_adc = 0;
+//			 return data_sick_new;
+//		 }
+//		 i_count++;
+//		 data_sick_old = data_sick_new;
+//		 return data_sick_old;
+//	   
+//}
+int TocDoen(int v0, int v1, int vmax,int quangduonght, uint16_t quangDuongCanDen, int phanTramTangToc, int phanTramGiamToc) 
+{
+	  uint16_t quangDuongTangToc = (quangDuongCanDen * phanTramTangToc) / 100;
+    uint16_t quangDuongGiamToc = (quangDuongCanDen * phanTramGiamToc) / 100;
+
+    if (quangduonght < quangDuongTangToc) {
+        vt1 = v0 + (vmax - v0) * quangduonght/ quangDuongTangToc;
+    } 
+		if (quangduonght >= (quangDuongCanDen-quangDuongGiamToc) && quangduonght < quangDuongCanDen) {
+  //     vt1 = vmax - (vmax - v1) * (quangduonght-(quangDuongCanDen-quangDuongGiamToc))/(quangDuongCanDen-(quangDuongCanDen-quangDuongGiamToc));
+			vt1=v1+(vmax-v1)*(quangDuongCanDen-quangduonght)/quangDuongGiamToc;
+    }
+    return vt1;
+}
+
+uint16_t tocdo_1(uint16_t en, uint16_t toc_do_thap,uint16_t toc_do_cao,uint16_t quang_duong,uint16_t quang_duong_tang,uint16_t quang_duong_giam)
+{
+  int16_t l1,l2;
+  l1=(quang_duong_tang*quang_duong)/100;
+  l2=((100-quang_duong_giam)*quang_duong)/100;
+  if(en<l1){vt1=toc_do_cao;}
+  if(en>=l2&&en<quang_duong){vt1=toc_do_cao-(toc_do_cao-toc_do_thap)*(en-l2)/(quang_duong-l2);}
+  return vt1;  
+}
+
+
+int tinh_goc_xoay(int goc_can_lay, int van_toc_goc)
+{
+  int output_c;
+  int sai_so_goc_truoc, sai_so_goc;
+  sai_so_goc =  goc_can_lay-angle;
+  output_c = sai_so_goc*0.2+sai_so_goc*0.0001;
+  output_c = Limit(output_c, van_toc_goc);
+  return output_c;
+}
+
+void omi4Banh(int van_toc_tinh_tien, int goc_tinh_tien, int van_toc_goc, int goc_quay,int tang,int giam)
+{
+  int v_quay = tinh_goc_xoay(goc_quay, van_toc_goc);
+
+//  int van_toc= van_toc_tinh_tien;
+//  
+//  if (van_toc_thuc != van_toc)
+//  {
+//    if (van_toc == 0)
+//    {
+//      van_toc_thuc = 0;
+//    }
+//    else if (van_toc < van_toc_thuc)
+//    {
+//      van_toc_thuc -=giam;
+//    }
+//    else if (van_toc > van_toc_thuc)
+//    {
+//      van_toc_thuc +=tang;
+//    }
+//  }
+//  else
+//	{
+//		 van_toc_thuc = van_toc;    
+//  }
+  van_toc_thuc=van_toc_tinh_tien;
+  PWMA = v_quay + van_toc_thuc * cos((goc_tinh_tien - angle - 2250) * (PI / 1800)); //v A
+  PWMB = v_quay + van_toc_thuc * cos((goc_tinh_tien - angle + 450) * (PI / 1800)); //v B
+  PWMC = v_quay + van_toc_thuc * cos((goc_tinh_tien - angle - 450) * (PI / 1800)); //v C
+  PWMD = v_quay + van_toc_thuc * cos((goc_tinh_tien - angle - 1350) * (PI / 1800)); //v D
+
+chieu1 =(PWMA > 0) ? 0 : 1;
+chieu2 =(PWMB > 0) ? 0 : 1;
+chieu3 =(PWMC > 0) ? 0 : 1;
+chieu4 =(PWMD > 0) ? 0 : 1;
+	
+  if (0<PWMA&&PWMA<4) {PWMA=2;} 
+  if (0<PWMB&&PWMB<4) {PWMB=2;}
+  if (0<PWMC&&PWMC<4) {PWMC=2;}
+  if (0<PWMD&&PWMD<4) {PWMD=2;} 
+	
+  if (PWMA<-250||PWMA>250) {PWMA=250;} 
+  if (PWMB<-250||PWMB>250) {PWMB=250;}
+  if (PWMC<-250||PWMC>250) {PWMC=250;}
+  if (PWMD<-250||PWMD>250) {PWMD=250;}
+  
+//  pid_dc1(chieu1,abs(PWMA)); 
+//  pid_dc2(chieu2,abs(PWMB));
+//  pid_dc3(chieu3,abs(PWMC)); 
+//  pid_dc4(chieu4,abs(PWMD));  
+	// code dung
+	DC1.Dir = chieu1; DC1.Speed = abs(PWMA);
+	DC2.Dir = chieu2; DC2.Speed = abs(PWMB);
+	DC3.Dir = chieu3; DC3.Speed = abs(PWMC);
+	DC4.Dir = chieu4; DC4.Speed = abs(PWMD);
+}
+
+//chay _theo_sick
+int TocDo1(int v0, int v1, int vmax,int viTriHtai,int viTriGoc, int quangDuongCanDen, int phanTramTangToc, int phanTramGiamToc) {
+	  quangDuongCanDen=quangDuongCanDen-viTriGoc;
+	  int khoang_cach_ht = viTriHtai-viTriGoc;
+	  uint16_t quangDuongTangToc = (abs(quangDuongCanDen) * phanTramTangToc) / 100;
+    uint16_t quangDuongGiamToc = (abs(quangDuongCanDen) * phanTramGiamToc) / 100;
+    if (abs(khoang_cach_ht) < quangDuongTangToc) {
+        vt = v0 + (vmax - v0) * abs(khoang_cach_ht) / quangDuongTangToc;
+    } 
+		if (abs(khoang_cach_ht) >= (abs(quangDuongCanDen)-quangDuongGiamToc) && abs(khoang_cach_ht) < abs(quangDuongCanDen)) {
+        vt = vmax - (vmax - v1) * (abs(khoang_cach_ht)-(abs(quangDuongCanDen)-quangDuongGiamToc)) / (abs(quangDuongCanDen)-(abs(quangDuongCanDen)-quangDuongGiamToc));
+    }
+    return vt;
+}
+
+void xoay_dc1(int goc_banh,float toc_do){
+    uint64_t en_xoay=(abs(goc_banh)*10020*7)/360;
+    HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,!chieu_dc1);
+    if(chieu_dc1==0){va=va+en_xoay;}else {va=va-en_xoay;};
+    while(en_xoay--)
+    {
+      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,1);
+        DWT_Delay_us(toc_do);
+      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,0);
+        DWT_Delay_us(toc_do);
+    }
+}
+void xoay_dc2(int goc_banh,float toc_do){
+    uint64_t en_xoay=(abs(goc_banh)*10020*7)/360; 
+    HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,!chieu_dc2);
+    //if(chieu_dc2==0){vb=vb+en_xoay;}else {vb=vb-en_xoay;};
+    while(en_xoay--)
+    {
+        HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
+        DWT_Delay_us(toc_do);
+        HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
+        DWT_Delay_us(toc_do);
+    }
+}
+void xoay_dc3(int goc_banh,float toc_do){
+    uint64_t en_xoay=(abs(goc_banh)*10020*7)/360; 
+    HAL_GPIO_WritePin(GPIOC,GPIO_PIN_9,!chieu_dc3);
+    while(en_xoay--)
+    {	
+      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,1);
+        DWT_Delay_us(toc_do);
+      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
+        DWT_Delay_us(toc_do);
+    }
+}
+void xoay_dc4(int goc_banh,float toc_do){
+    uint64_t en_xoay=(abs(goc_banh)*10020*7)/360; 
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,!chieu_dc4);
+    //if(chieu_dc4==1){vd=vd+en_xoay;}else {vd=vd-en_xoay;};
+    while(en_xoay--)
+    {
+        HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,1);
+        DWT_Delay_us(toc_do);
+      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,0);
+        DWT_Delay_us(toc_do);
+    }
+}
+double modulo(double a, double b)
+{
+    z = a - b * floor(a / b);
+	return z;
+}
+double closestAngle(double a, double b)
+{
+    // L?y hu?ng
+     dir = modulo(b, 360.0) - modulo(a, 360.0);
+
+    // Chuy?n d?i t? -360 d?n 360 thành -180 d?n 180
+    if (fabs(dir) > 180.0)
+    {
+        dir = -(copysign(1.0,dir)*360)+dir;
+			//(dir < 0) ? dir + 360.0 : dir - 360.0;
+    }
+    return dir;
+}
+
+void goc_gan_nhat(struct AngleInfo *result,int goc_htai,int goc_moi,int xd_angle)
+	{
+
+		 x = closestAngle(goc_htai, goc_moi);
+     y = closestAngle(goc_htai, goc_moi + 180.0);
+		if(abs(x)>abs(y)){result->goc_xoay=y;}
+		if(abs(x)<=abs(y)){result->goc_xoay=x;}
+
+		if(result->goc_xoay>0){result->chieu_xoay=0;}
+		else if(result->goc_xoay<=0){result->chieu_xoay=1;}
+			
+    if (abs(x) <= abs(y)&&xd_angle==1){chieu_tt1= chieu_tt1;}
+    if (abs(x) >  abs(y)&&xd_angle==1){chieu_tt1=!chieu_tt1;}
+		
+		if (abs(x) <= abs(y)&&xd_angle==2){chieu_tt2=chieu_tt2; }
+    if (abs(x) >  abs(y)&&xd_angle==2){chieu_tt2=!chieu_tt2;}
+		
+		if (abs(x) <= abs(y)&&xd_angle==3){chieu_tt3=chieu_tt3; }
+    if (abs(x) >  abs(y)&&xd_angle==3){chieu_tt3=!chieu_tt3;}
+		
+		if (abs(x) <= abs(y)&&xd_angle==4){chieu_tt4=chieu_tt4; }
+    if (abs(x) >  abs(y)&&xd_angle==4){chieu_tt4=!chieu_tt4;}
+}
+	
+
+void Tim_goc_gan_nhat(struct AngleInfo *result,int goc_htai,int goc_moi,int xd_angle)
+	{
+
+//		 x = closestAngle(goc_htai, goc_moi);
+//     y = closestAngle(goc_htai, goc_moi + 180.0);
+//		if(abs(x)>=abs(y)){result->goc_xoay=y;}
+//		if(abs(x)<abs(y)){result->goc_xoay=x;}
+      x = goc_htai - goc_moi;
+		  y = goc_htai - (goc_moi+180.0);
+		if(result->goc_xoay>0){result->chieu_xoay=0;}
+		else if(result->goc_xoay<=0){result->chieu_xoay=1;}
+			
+    if (abs(x) <= abs(y)&&xd_angle==1){chieu_tt1= chieu_tt1;}
+    if (abs(x) >  abs(y)&&xd_angle==1){chieu_tt1=!chieu_tt1;}
+		
+		if (abs(x) <= abs(y)&&xd_angle==2){chieu_tt2=chieu_tt2; }
+    if (abs(x) >  abs(y)&&xd_angle==2){chieu_tt2=!chieu_tt2;}
+		
+		if (abs(x) <= abs(y)&&xd_angle==3){chieu_tt3=chieu_tt3; }
+    if (abs(x) >  abs(y)&&xd_angle==3){chieu_tt3=!chieu_tt3;}
+		
+		if (abs(x) <= abs(y)&&xd_angle==4){chieu_tt4=chieu_tt4; }
+    if (abs(x) >  abs(y)&&xd_angle==4){chieu_tt4=!chieu_tt4;}
+}
+
+
+void Swerve_4(int huong_chay,int toc_do,int goc_xoay,float L,float W,int tang,int giam,int HS)//duyken166
+{
+		int sai_so_goc=(goc_xoay-AngleRT)*HS;
+		
+		if(toc_do<van_toc_thuc){
+			van_toc_thuc-=giam;
+			if(van_toc_thuc<toc_do){van_toc_thuc=toc_do;}
+		}
+		if(toc_do>van_toc_thuc){
+			van_toc_thuc+=tang;
+		  if(van_toc_thuc>toc_do){van_toc_thuc=toc_do;}
+		}
+		
+		R=sqrt(pow(L, 2) + pow(W, 2));
+		
+		A=sin((huong_chay-AngleRT)*(PI/180))-sin(sai_so_goc*(PI/180))*(L/R);
+		B=sin((huong_chay-AngleRT)*(PI/180))+sin(sai_so_goc*(PI/180))*(L/R);
+		C=cos((huong_chay-AngleRT)*(PI/180))-sin(sai_so_goc*(PI/180))*(W/R);
+		D=cos((huong_chay-AngleRT)*(PI/180))+sin(sai_so_goc*(PI/180))*(W/R);
+		
+		speed[0]=sqrt(pow(B, 2) + pow(C, 2));
+		speed[1]=sqrt(pow(B, 2) + pow(D, 2));
+		speed[2]=sqrt(pow(A, 2) + pow(D, 2));
+		speed[3]=sqrt(pow(A, 2) + pow(C, 2));
+		
+		max=speed[0];
+		for(int i=1;i<4;i++){if(speed[i]>max){max=speed[i];}}
+		
+		if(ktra_khoa==1){toc_do=0;}
+		
+		speed_thuc[0] = (max > 1) ? (speed[0]/max)*van_toc_thuc : speed[0]*van_toc_thuc ;
+		speed_thuc[1] = (max > 1) ? (speed[1]/max)*van_toc_thuc : speed[1]*van_toc_thuc ;
+		speed_thuc[2] = (max > 1) ? (speed[2]/max)*van_toc_thuc : speed[2]*van_toc_thuc ;
+		speed_thuc[3] = (max > 1) ? (speed[3]/max)*van_toc_thuc : speed[3]*van_toc_thuc ;
+		
+		Angle1=(1.5707-atan2(C,B))*(180/PI);
+		Angle2=(1.5707-atan2(D,B))*(180/PI);   // 15707 = pi/2
+		Angle3=(1.5707-atan2(D,A))*(180/PI);
+		Angle4=(1.5707-atan2(C,A))*(180/PI);
+		
+if(Angle1-goc_htaiA!=0){goc_gan_nhat(&result,goc_htaiA,Angle1,1);chieu_dc1=result.chieu_xoay;goc_dc1=result.goc_xoay;xoay_dc1(goc_dc1,10);}
+if(Angle2-goc_htaiB!=0){goc_gan_nhat(&result,goc_htaiB,Angle2,2);chieu_dc2=result.chieu_xoay;goc_dc2=result.goc_xoay;xoay_dc2(goc_dc2,10);}
+if(Angle3-goc_htaiC!=0){goc_gan_nhat(&result,goc_htaiC,Angle3,3);chieu_dc3=result.chieu_xoay;goc_dc3=result.goc_xoay;xoay_dc3(goc_dc3,10);}
+if(Angle4-goc_htaiD!=0){goc_gan_nhat(&result,goc_htaiD,Angle4,4);chieu_dc4=result.chieu_xoay;goc_dc4=result.goc_xoay;xoay_dc4(goc_dc4,10);}
+//pid_dc1(chieu_tt1,speed_thuc[0]);
+//pid_dc2(chieu_tt2,speed_thuc[1]);
+//pid_dc3(chieu_tt3,speed_thuc[2]);
+//pid_dc4(chieu_tt4,speed_thuc[3]);
+// code dung
+	DC1.Dir = chieu_tt1; DC1.Speed = speed_thuc[0];
+	DC2.Dir = chieu_tt2; DC2.Speed = speed_thuc[1];
+	DC3.Dir = chieu_tt3; DC3.Speed = speed_thuc[2];
+	DC4.Dir = chieu_tt4; DC4.Speed = speed_thuc[3];
+		goc_htaiA=Angle1;
+		goc_htaiB=Angle2;
+		goc_htaiC=Angle3;
+		goc_htaiD=Angle4;
+
+	}
+	///3 banh swerve
+void Swerve_3(int huong_chay,int toc_do,int goc_xoay,int toc_do_xoay,float L,float W,int tang,int giam,int HS)
+	{ 
+        int sai_so_goc=(goc_xoay-AngleRT);
+//		int ss= abs(sai_so_goc);
+//		int a=	((pow(ss*0.1,2)*254) >254 ) ? (254) : (pow(ss*0.1,2)*254) ;	
+//		int RCW= ( sai_so_goc ==0 ) ? (0) : ((a*sai_so_goc/ss)*toc_do_xoay/100) ;	
+		int ss= abs(sai_so_goc*1);
+		int a=	(ss >254 ) ? (254) : (ss) ;	
+		int RCW= ( sai_so_goc ==0 ) ? (0) : ((a*sai_so_goc/abs(sai_so_goc))*toc_do_xoay/100) ;
+		if(toc_do<van_toc_thuc){
+			van_toc_thuc-=giam;
+			if(van_toc_thuc<toc_do){van_toc_thuc=toc_do;}
+		}
+		if(toc_do>van_toc_thuc){
+			van_toc_thuc+=tang;
+		  if(van_toc_thuc>toc_do){van_toc_thuc=toc_do;}
+		}
+		
+		R=sqrt(pow(L, 2) + pow(W, 2));
+		
+		A=sin((huong_chay-AngleRT)*(PI/180))*toc_do-RCW*(W/R);
+		B=sin((huong_chay-AngleRT)*(PI/180))*toc_do+RCW*(W/R);
+		C=cos((huong_chay-AngleRT)*(PI/180))*toc_do-RCW*(L/R);
+		D=cos((huong_chay-AngleRT)*(PI/180))*toc_do+RCW*(L/R);
+		
+		
+		speed[0]=sqrt(pow(B, 2) + pow(C, 2));
+		speed[1]=sqrt(pow(B, 2) + pow(D, 2));
+		speed[2]=sqrt(pow(A, 2) + pow(cos((huong_chay-AngleRT)*(PI/180))*toc_do, 2));
+		
+		max=speed[0];
+		for(int i=1;i<3;i++){if(speed[i]>max){max=speed[i];}}
+		
+		if(ktra_khoa==1){toc_do=0;}
+		
+		speed_thuc[0] = (max > 254) ? ((speed[0]/max)*254): (speed[0]);// tocdo banh xe 1
+		speed_thuc[1] = (max > 254) ? ((speed[1]/max)*254): (speed[1]);// tocdo banh xe 2
+		speed_thuc[2] = (max > 254) ? ((speed[2]/max)*254): (speed[2]);// tocdo banh xe 3
+		
+
+		Angle1=(1.5707-atan2(C,B))*(180/PI);// goc banh xe 1
+		Angle2=(1.5707-atan2(D,B))*(180/PI);//goc banh xe 2
+		Angle3=(1.5707-atan2(cos((huong_chay-AngleRT)*(PI/180))*toc_do,A))*(180/PI);// goc banh xe 3
+
+// xoay dc xoay1
+        if(Angle1-goc_htaiA!=0){
+            goc_gan_nhat(&result,goc_htaiA,Angle1,1);
+            chieu_dc1=result.chieu_xoay;
+            goc_dc1=result.goc_xoay;// goc_dc1 laf goc thuc cua banh xe 1
+            mode_dc1=1;
+        }
+        if(Angle2-goc_htaiB!=0){
+            goc_gan_nhat(&result,goc_htaiB,Angle2,2);
+            chieu_dc2=result.chieu_xoay;
+            goc_dc2=result.goc_xoay;// goc_dc2 laf goc thuc cua banh xe 1
+            mode_dc2=1;
+        }//xoay dc xoay 2
+        if(Angle3-goc_htaiC!=0)
+        {
+            goc_gan_nhat(&result,goc_htaiC,Angle3,3);
+            chieu_dc3=result.chieu_xoay;
+            goc_dc3=result.goc_xoay;// goc_dc3 laf goc thuc cua banh xe 1
+            mode_dc3=1;
+        }//xoay dc xoay 3
+
+//mode_dc1=mode_dc2=mode_dc3=0;
+//pid_dc1(chieu_tt1,speed_thuc[0]);  //chieu_tt1
+//pid_dc2(chieu_tt2,speed_thuc[1]);
+//pid_dc3(chieu_tt3,speed_thuc[2]);
+  //
+	DC1.Dir = chieu_tt1; DC1.Speed = speed_thuc[0];
+	DC2.Dir = chieu_tt2; DC2.Speed = speed_thuc[1];
+	DC3.Dir = chieu_tt3; DC3.Speed = speed_thuc[2];
+    goc_htaiA=Angle1;
+    goc_htaiB=Angle2;
+    goc_htaiC=Angle3;
+
+}
+
+void delay(int d) {
+	   while(d--) {
+			 DWT_Delay_us(50000000);
+		 }
+	}
+void vegoc0(int chieu)
+{		
+		uint64_t en_xoay=(360*1920*5)/360;
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,chieu);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,chieu);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,chieu);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_9,chieu);
+	
+	while( (FEE_RTOS_struct.H_GPIO.S9==0
+	||FEE_RTOS_struct.H_GPIO.S14==0||FEE_RTOS_struct.H_GPIO.S12==0))
+{
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,!FEE_RTOS_struct.H_GPIO.S14);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,!FEE_RTOS_struct.H_GPIO.S9);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,!FEE_RTOS_struct.H_GPIO.S12);
+	DWT_Delay_us(50);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,0);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
+	DWT_Delay_us(50);
+}
+}
+
+void vegoc03()
+{
+    int chieu03=3;
+    HAL_Delay(500);
+    int dem1=1;
+    while(FEE_PES.L1==1)
+    {	
+        while(FEE_PES.Left==1&&FEE_PES.Right==1)
+        {
+            osDelay(1);
+            if(FEE_PES.Select==0)
+            {
+                while(FEE_PES.Select==0)
+                {
+                    osDelay(1);
+                }
+                dem1++;
+            }
+		if(dem1==4)
+		{
+            dem1=1;
+		}
+	};
+
+	if(dem1==1)
+	{ 
+		if(FEE_PES.Left==0)
+        {
+            chieu03=1;
+            HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,chieu03);
+            HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,1);
+            DWT_Delay_us(10);
+            HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,0);
+            DWT_Delay_us(10);
+		}
+		  
+	 else if(FEE_PES.Right==0){chieu03=0;
+				HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,chieu03);
+		    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,1);
+	DWT_Delay_us(10);
+	    	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,0);
+	DWT_Delay_us(10);
+			}
+	  else if(FEE_PES.Right==1 && FEE_PES.Left==1) {
+		      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,0);
+		   }
+		 }
+	
+	 
+	else if(dem1==2)
+	{
+			if(FEE_PES.Left==0){chieu03=1;
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,chieu03);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
+	DWT_Delay_us(10);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
+	DWT_Delay_us(10);
+		  }
+	 else if(FEE_PES.Right==0){chieu03=0;
+				HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,chieu03);
+		    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
+	DWT_Delay_us(10);
+	    	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
+	DWT_Delay_us(10);
+			}
+	 	else if(FEE_PES.Right==1 && FEE_PES.Left==1) {
+		      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
+		  }
+	}
+	else if(dem1==3)
+		{	
+		if(FEE_PES.Left==0){chieu03=1;
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_9,chieu03);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,1);
+	DWT_Delay_us(10);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
+	DWT_Delay_us(10);
+		     }
+	
+	 else if(FEE_PES.Right==0){chieu03=0;
+				HAL_GPIO_WritePin(GPIOC,GPIO_PIN_9,chieu03);
+		    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,1);
+	DWT_Delay_us(10);
+	    	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
+	DWT_Delay_us(10);
+			}
+	 else if(FEE_PES.Right==1 && FEE_PES.Left==1) {
+		      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
+		   }
+		}
+}
+}
+
+void stop_sw(int banh1,int banh2,int banh3,int toc_do)
+{
+//	pid_dc1(chieu_tt1,30);  //speed_thuc[0]
+//	pid_dc2(chieu_tt2,30);  //speed_thuc[1]
+//	pid_dc3(chieu_tt3,30);  //speed_thuc[2]
+	DC1.Dir = chieu_tt1; DC1.Speed = 30;
+	DC2.Dir = chieu_tt2; DC2.Speed = 30;
+	DC3.Dir = chieu_tt3; DC3.Speed = 30;
+	
+	if(banh1-goc_htaiA!=0){goc_gan_nhat(&result,goc_htaiA,banh1,1);chieu_dc1=result.chieu_xoay;goc_dc1=result.goc_xoay;mode_dc1=1;}
+	if(banh2-goc_htaiB!=0){goc_gan_nhat(&result,goc_htaiB,banh2,2);chieu_dc2=result.chieu_xoay;goc_dc2=result.goc_xoay;mode_dc2=1;}
+	if(banh3-goc_htaiC!=0){goc_gan_nhat(&result,goc_htaiC,banh3,3);chieu_dc3=result.chieu_xoay;goc_dc3=result.goc_xoay;mode_dc3=1;}
+	
+	goc_htaiA=banh1;
+	goc_htaiB=banh2;
+	goc_htaiC=banh3;
+}
+
+void ve_vt()
+{
+int ma=abs(va)/(1920*5);
+int mb=abs(vb)/(1920*5);
+int mc=abs(vc)/(1920*5);
+
+if(ma>=1){if(va<0){chieu_dc1=0;}else{chieu_dc1=1;};xoay_dc1(ma*360,10);va=0;}
+if(mb>=1){if(vb<0){chieu_dc2=0;}else{chieu_dc2=1;};xoay_dc2(mb*360,10);vb=0;}
+if(mc>=1){if(vc<0){chieu_dc3=0;}else{chieu_dc3=1;};xoay_dc3(mc*360,10);vc=0;}
+}
