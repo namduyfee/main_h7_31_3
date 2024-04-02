@@ -26,6 +26,8 @@ void count_bong(void);
 
 void ap_thanh_lay_bong(void); 
 
+void nut_lai_tay_td7_san_do(void); 
+
 //void gap_vi_tri_tha_lua_dau_tien(void); 
 //void gap_vi_tri_lua_thu_2(void); 
 //void gap_vi_tri_lua_thu_3(void); 

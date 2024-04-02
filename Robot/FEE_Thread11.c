@@ -50,13 +50,13 @@ void StartTask11(void const * argument)
     {
 			
       osDelay(1);
-			if(7 <= FEE.TuDong.tudong_number) {
-				if(0 == FEE.TuDong.Connected_sensor_color) {
-					
-					HAL_UART_Receive_IT(&huart6, &FEE.TuDong.cam_bien_mau, 1); 
-//					FEE.TuDong.Connected_sensor_color = 1; 
-				}
-			}
+//			if(7 <= FEE.TuDong.tudong_number) {
+//				if(0 == FEE.TuDong.Connected_sensor_color) {
+//					
+//					HAL_UART_Receive_IT(&huart6, &FEE.TuDong.cam_bien_mau, 1); 
+////					FEE.TuDong.Connected_sensor_color = 1; 
+//				}
+//			}
     }
     /* USER CODE END StartTask08 */
 }

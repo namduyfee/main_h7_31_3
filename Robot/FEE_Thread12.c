@@ -60,9 +60,9 @@ void StartTask12(void const * argument)
     {
 			osDelay(1); 
 			
-//			sprintf(String_LCD, "%4d",Compass1.zAngle);
-//			lcd_put_cur(0,0);
-//			lcd_send_string(String_LCD);
+			sprintf(String_LCD, "%4d",Compass1.zAngle);
+			lcd_put_cur(0,0);
+			lcd_send_string(String_LCD);
 		
 //			sprintf(String_LCD, "%2d",step_number_td7);
 //			lcd_put_cur(1,14);
@@ -70,14 +70,18 @@ void StartTask12(void const * argument)
 			
 			// 260  12336
 			
-			sprintf(String_LCD, "%4d",EncoderCount1);
-			lcd_put_cur(0,6);
-			lcd_send_string(String_LCD); 
-		
+//			sprintf(String_LCD, "%4d",EncoderCount1);
+//			lcd_put_cur(0,6);
+//			lcd_send_string(String_LCD); 
+//		
 //			sprintf(String_LCD, "%5.1f",FEE.H_ADC.adc_value_Result[1]);
 //			lcd_put_cur(0,8);
 //			lcd_send_string(String_LCD);
-//		
+		
+//			sprintf(String_LCD, "%5.1f",FEE.H_ADC.adc_value_Result[0]);
+//			lcd_put_cur(0,8);
+//			lcd_send_string(String_LCD);			
+			
 			sprintf(String_LCD, "%5.1f",FEE.H_ADC.adc_value_Result[4]);
 			lcd_put_cur(1,0);
 			lcd_send_string(String_LCD);

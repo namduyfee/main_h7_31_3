@@ -41,6 +41,7 @@ extern uint8_t tem_trang_thai_td7;
 extern int8_t step_number_td7; 
 extern uint8_t enable_send_td7; 
 extern uint8_t tx_td7; 
+extern uint8_t tx_td5; 
 
 /* USER CODE BEGIN Header_StartTask06 */
 /**
@@ -77,7 +78,7 @@ void StartTask06(void const * argument)
 								}
 								
 								else if(2 == FEE.TuDong.tudong_number) {
-									osDelay(140); 
+									osDelay(120); 
 									keo_lua_vao(); 
 									FEE.TuDong.done_tudong_main1[1] = 2; 
 								}

@@ -96,7 +96,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 F (../Core/Src/freertos.c)(0x6480B9F3)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\freertos.o --depend main_rb_k14_code\freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6480B636)
 I (D:\keilC\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
@@ -382,7 +382,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h)(0x6480B60C)
 I (..\FEE\FEE_Kalman_Filter.h)(0x65BA1E35)
 I (../Core/Inc/main.h)(0x6604105C)
 F (..\FEE\FEE_ADC.h)(0x65EC49C3)()
-F (..\FEE\FEE_RTOS.c)(0x66087CED)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_rtos.o --depend main_rb_k14_code\fee_rtos.d)
+F (..\FEE\FEE_RTOS.c)(0x660BF2F3)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_rtos.o --depend main_rb_k14_code\fee_rtos.d)
 I (../Core/Inc/main.h)(0x6604105C)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6480B60B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x6489EC5B)
@@ -476,7 +476,7 @@ I (..\FEE\FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Library.h)(0x65F50FD5)
 I (..\FEE\FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\FEE\FEE_RTOS.h)(0x65EC50A9)()
 F (..\FEE\FEE_USB.c)(0x6606F682)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_usb.o --depend main_rb_k14_code\fee_usb.d)
@@ -1373,7 +1373,7 @@ I (..\FEE\FEE_STM32F103C8T6.h)(0x65F126C8)
 I (..\FEE\FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Library.h)(0x65F50FD5)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\FEE\FEE_Main_Phu.h)(0x65F69933)()
 F (..\Robot\FEE_Robot.c)(0x660842C6)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_robot.o --depend main_rb_k14_code\fee_robot.d)
@@ -1464,7 +1464,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\Robot\FEE_Robot.h)(0x66058AAA)()
 F (..\Robot\FEE_Thread1.c)(0x660166A7)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread1.o --depend main_rb_k14_code\fee_thread1.d)
@@ -1561,7 +1561,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\Robot\FEE_Thread2.c)(0x6607C37D)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread2.o --depend main_rb_k14_code\fee_thread2.d)
 I (../Core/Inc/main.h)(0x6604105C)
@@ -1656,7 +1656,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\Robot\FEE_Thread3.c)(0x65ECA043)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread3.o --depend main_rb_k14_code\fee_thread3.d)
 I (../Core/Inc/main.h)(0x6604105C)
@@ -1751,9 +1751,9 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
-F (..\Robot\FEE_Thread4.c)(0x6606CD97)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread4.o --depend main_rb_k14_code\fee_thread4.d)
+F (..\Robot\FEE_Thread4.c)(0x660BD902)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread4.o --depend main_rb_k14_code\fee_thread4.d)
 I (../Core/Inc/main.h)(0x6604105C)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6480B60B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x6489EC5B)
@@ -1847,8 +1847,8 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
-F (..\Robot\FEE_Thread5.c)(0x66092825)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread5.o --depend main_rb_k14_code\fee_thread5.d)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
+F (..\Robot\FEE_Thread5.c)(0x660C27BA)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread5.o --depend main_rb_k14_code\fee_thread5.d)
 I (../Core/Inc/main.h)(0x6604105C)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6480B60B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x6489EC5B)
@@ -1941,9 +1941,9 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
-F (..\Robot\FEE_Thread6.c)(0x660927DA)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread6.o --depend main_rb_k14_code\fee_thread6.d)
+F (..\Robot\FEE_Thread6.c)(0x660C27BA)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread6.o --depend main_rb_k14_code\fee_thread6.d)
 I (../Core/Inc/main.h)(0x6604105C)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6480B60B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x6489EC5B)
@@ -2036,7 +2036,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\Robot\FEE_Thread7.c)(0x65F510FE)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread7.o --depend main_rb_k14_code\fee_thread7.d)
 I (../Core/Inc/main.h)(0x6604105C)
@@ -2131,7 +2131,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\Robot\FEE_Thread8.c)(0x66005065)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread8.o --depend main_rb_k14_code\fee_thread8.d)
 I (../Core/Inc/main.h)(0x6604105C)
@@ -2226,7 +2226,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\Robot\FEE_Thread9.c)(0x65F12775)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread9.o --depend main_rb_k14_code\fee_thread9.d)
 I (../Core/Inc/main.h)(0x6604105C)
@@ -2321,7 +2321,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\Robot\FEE_Thread10.c)(0x6606F549)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread10.o --depend main_rb_k14_code\fee_thread10.d)
 I (../Core/Inc/main.h)(0x6604105C)
@@ -2416,9 +2416,9 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
-F (..\Robot\FEE_Thread11.c)(0x6606BD92)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread11.o --depend main_rb_k14_code\fee_thread11.d)
+F (..\Robot\FEE_Thread11.c)(0x660BA1E9)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread11.o --depend main_rb_k14_code\fee_thread11.d)
 I (../Core/Inc/main.h)(0x6604105C)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6480B60B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x6489EC5B)
@@ -2511,9 +2511,9 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
-F (..\Robot\FEE_Thread12.c)(0x66086C52)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread12.o --depend main_rb_k14_code\fee_thread12.d)
+F (..\Robot\FEE_Thread12.c)(0x660C251B)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread12.o --depend main_rb_k14_code\fee_thread12.d)
 I (../Core/Inc/main.h)(0x6604105C)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6480B60B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x6489EC5B)
@@ -2606,9 +2606,9 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
-F (..\Robot\FEE_Thread13.c)(0x65ECA043)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread13.o --depend main_rb_k14_code\fee_thread13.d)
+F (..\Robot\FEE_Thread13.c)(0x660BD383)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread13.o --depend main_rb_k14_code\fee_thread13.d)
 I (../Core/Inc/main.h)(0x6604105C)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6480B60B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x6489EC5B)
@@ -2701,7 +2701,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\Robot\FEE_Thread14.c)(0x66058BB8)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread14.o --depend main_rb_k14_code\fee_thread14.d)
 I (../Core/Inc/main.h)(0x6604105C)
@@ -2796,7 +2796,7 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
 F (..\Robot\FEE_Thread15.c)(0x6607CFB3)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_thread15.o --depend main_rb_k14_code\fee_thread15.d)
 I (../Core/Inc/main.h)(0x6604105C)
@@ -2891,10 +2891,10 @@ I (../FEE/FEE_STM32F103C8T6.h)(0x65F126C8)
 I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
-I (../Robot/FEE_Tu_Dong.h)(0x66084116)
+I (../Robot/FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
-F (..\Robot\FEE_Tu_Dong.c)(0x660911BC)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_tu_dong.o --depend main_rb_k14_code\fee_tu_dong.d)
-I (..\Robot\FEE_Tu_Dong.h)(0x66084116)
+F (..\Robot\FEE_Tu_Dong.c)(0x660C2789)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\fee_tu_dong.o --depend main_rb_k14_code\fee_tu_dong.d)
+I (..\Robot\FEE_Tu_Dong.h)(0x660B1592)
 I (../Core/Inc/main.h)(0x6604105C)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6480B60B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x6489EC5B)
@@ -2982,7 +2982,7 @@ I (../FEE/FEE_Absolute_Encoder.h)(0x65EC4E10)
 I (../Robot/FEE_Robot.h)(0x66058AAA)
 I (../FEE/FEE_Main_Phu.h)(0x65F69933)
 I (../Core/Inc/dwt_stm32_delay.h)(0x65A27CA9)
-F (..\Robot\FEE_Tu_Dong.h)(0x66084116)()
+F (..\Robot\FEE_Tu_Dong.h)(0x660B1592)()
 F (../USB_DEVICE/App/usb_device.c)(0x6480B9F4)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -g -O3 -Otime --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FEE -I ../Robot -I ..\LCD_1.69_lb -I ..\LCD_1.69_lb\GUI_DEV-I.\RTE\_Main_RB_K14_CODE-ID:\keilC\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\keilC\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H750xx-o main_rb_k14_code\usb_device.o --depend main_rb_k14_code\usb_device.d)
 I (../USB_DEVICE/App/usb_device.h)(0x6480B9F4)
 I (../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h)(0x649529DC)

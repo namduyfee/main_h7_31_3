@@ -50,17 +50,21 @@ extern uint8_t comple_receiver_main_1[20];
 
 uint8_t tem_en = 0; 				
 
+/**************************** TDD5 **********************************/
+uint8_t tx_td5; 
+/**************************** TDD7 **********************************/ 
 uint8_t tem_trang_thai_td7 = 0; 			// thoat while
 int8_t step_number_td7 = 0; 					// cac vi tri tha lua 
 uint8_t enable_send_td7 = 0; 				// cho phep truyen 
 uint8_t tx_td7; 
-uint8_t enable_di_chuyen_td7 = 0; 
+uint8_t enable_di_chuyen_td7 = 0; 								
 
+uint8_t enable_lai_tay_td7 = 0; 										// 1 : cho phep lai tay 0 ; la ko dc lai tay
 //uint8_t tx_td7; 
 //int tem_goc_td7; 
 //uint8_t tem_break_td7; 
 //uint8_t tem_reset_encoder_td7; 
-
+/************************* TDD6 ***************************************/ 
 uint16_t tem_huong_di_chuyen_td6 = 0; 
 uint16_t tem_toc_do_danh_td6 = 0; 
 uint8_t check_tem_huong_di_chuyen_td6 = 0; 
@@ -191,6 +195,7 @@ void StartTask05(void const * argument)
 			// ============= DI CHUYEN 4 =============== //
 			else if (4 == FEE.TuDong.tudong_number) {
 				
+				
 				reset_encoder(); 
 				
 				while(4 == FEE.TuDong.tudong_number) {
@@ -200,11 +205,11 @@ void StartTask05(void const * argument)
 					if(0 == mode) {
 						FEE.TuDong.tudong_number = 45; 
 						break; 
-					}		
-					
-					if(EncoderCount1 > 200)
+					}	
+						
+					if(EncoderCount1 > 200) 
 						FEE.TuDong.enable_count = 0; 
-					
+						
 					if(FEE.TuDong.dk_cam_bien < FEE.Ts_San.vi_tri_dung_3 - 1) {
 						FEE.Ts_San.toc_do_lua_doc = 35; 
 						FEE.Ts_San.toc_do_lua_ngang = 46; 
@@ -214,6 +219,7 @@ void StartTask05(void const * argument)
 						FEE.Ts_San.toc_do_lua_ngang = 34; 
 					}
 					
+					
 					di_chuyen_lay_lua(); 
 					
 					if(FEE.TuDong.dk_cam_bien == FEE.Ts_San.vi_tri_dung_3) {
@@ -221,7 +227,7 @@ void StartTask05(void const * argument)
 						encoder_di_ngang(); 
 						reset_encoder(); 
 						
-						while(EncoderCount1 < 12) {
+						while(EncoderCount1 < 16) {
 							
 							osDelay(1); 
 							
@@ -235,6 +241,7 @@ void StartTask05(void const * argument)
 						}									
 						
 						Stop_PID();
+						
 						FEE.TuDong.done_tudong_main1[4] = 1; 
 						ve_vt();
 						break; 
@@ -252,7 +259,9 @@ void StartTask05(void const * argument)
 					reset_encoder(); 
 					encoder_di_thang(); 
 					
-					while(EncoderCount1 < 500) {
+					Set_Angle(&Compass1,Z_axis,0);
+					
+					while(EncoderCount1 < 400) {
 						
 						if(0 == mode) {
 							FEE.TuDong.tudong_number = 45; 
@@ -268,12 +277,21 @@ void StartTask05(void const * argument)
 					}
 					tem_en = 1; 
 				}
+				
+				if(goc_rb > -20) 
+					day_lua_ra(); 
+				else 
+					keo_lua_vao(); 
+				
 				encoder_di_ngang(); 
 				
 				goc_rb = Compass1.zAngle; 
 				
+				if(goc_rb < -30) 
+					day_tay_tha_lua(); 
+				
 				if(goc_rb > -86 && check_tem_huong_di_chuyen_td6 == 0) {
-					tem_huong_di_chuyen_td6 = 210; 
+					tem_huong_di_chuyen_td6 = 205; 
 					tem_toc_do_danh_td6 = 40; 
 				}
 				else {
@@ -303,8 +321,14 @@ void StartTask05(void const * argument)
 				
 				encoder_di_thang(); 
 				
+				uint8_t flag_thu_tay_tha_lua = 0; 
+				
+				int tem_toc_do_song_song_thanh = 15; 
+				
 				while(step_number_td7 < 6) {
 					osDelay(1);
+					
+					tem_toc_do_song_song_thanh = 15; 
 					
 					if(0 == mode) {
 						FEE.TuDong.tudong_number = 45; 
@@ -331,63 +355,40 @@ void StartTask05(void const * argument)
 							break; 
 						}						 
 						
+						if(0 != step_number_td7 && EncoderCount1 > 1400) 
+							tem_toc_do_song_song_thanh = 8; 
+						
 						goc_rb = Compass1.zAngle; 
 						
-						int tem_goc = songSongThanh(12510, FEE.H_ADC.adc_value_Result[4], 15, 90, 45, 0); 
+						int tem_goc = songSongThanh(12415, FEE.H_ADC.adc_value_Result[4], 15, 90, 45, 0); 
 						
-						Swerve_4_V2(tem_goc, 15, -90, 100, 1); 
+						Swerve_4_V2(tem_goc, tem_toc_do_song_song_thanh, -90, 100, 1); 
 						
-						if(FEE.TuDong.cam_bien_mau != 0) 
+						if(FEE_GPIOIn.S2 == 0 || EncoderCount1 > 1535) 
 							tem_trang_thai_td7  = 1; 
 						
 						if(0 != step_number_td7) {
-							
 								if(EncoderCount1 < 650)  // 650
 									tem_trang_thai_td7 = 0; 
-								
+									
 								if(1 != step_number_td7) 
 									if(EncoderCount1 > limit_duoi_encoder && EncoderCount1 < limit_tren_encoder) {
-										if(step_number_td7 == 5) {
+										
+										if(step_number_td7 == 5 && flag_thu_tay_tha_lua == 0) {
 											thu_tay_tha_lua(); 	
+											flag_thu_tay_tha_lua = 1; 
 											osDelay(200); 
 										}											
 										 tx_td7 = 98 + step_number_td7;   // 'b' + step_number_td7[2,5] =>  d, e, f ... 
+										enable_send_td7 = 1; 
 									}
 						}
 					}
 					
 					
-					if(0 != step_number_td7) {
-						
-						reset_encoder(); 
-						if(step_number_td7 != 5) {
-							tx_td7 = 'M'; 
-							enable_send_td7 = 1; 
-						}
-							
-						
-						while(EncoderCount1 < 260) {
-							
-						osDelay(1); 	
-							
-							
-							
-						if(0 == mode) {
-							FEE.TuDong.tudong_number = 45; 
-							break; 
-						}							
-							
-						goc_rb = Compass1.zAngle; 
-							
-						int tem_goc = songSongThanh(12510, FEE.H_ADC.adc_value_Result[4], 15, 90, 45, 0); 
-						
-						Swerve_4_V2(tem_goc, 15, -90, 100, 1); 							
-							
-						}							
-					Stop_PID(); 
-					} 
-					
 					if(step_number_td7 != 0) {
+						
+						Stop_PID();  
 						
 						if(step_number_td7 != 1) {
 							while(comple_receiver_main_1[step_number_td7+5] == 0) {
@@ -399,6 +400,8 @@ void StartTask05(void const * argument)
 							}
 						}
 						
+						enable_lai_tay_td7 = 1; 
+						
 						while(FEE_PES.TamGiac == 1) {
 							osDelay(1); 
 							if(0 == mode) {
@@ -406,6 +409,8 @@ void StartTask05(void const * argument)
 								break; 
 							}	
 						}
+						
+						enable_lai_tay_td7 = 0; 
 						
 						tx_td7 = step_number_td7 + 48; 
 						
@@ -428,23 +433,84 @@ void StartTask05(void const * argument)
 					tem_trang_thai_td7  = 0;           // phai reset tem trang thai roi moi ++ neu khong se gui sai ki tu sang F1
 					
 					step_number_td7++;  
-					
-					if(step_number_td7 == 1) 
-						day_tay_tha_lua(); 					
+										
 				}
 				
-				Stop_PID(); 					
+				// di encoder tha 2 lua cuoi 
+				
+				encoder_di_thang(); 
+				reset_encoder(); 
 
-				FEE.TuDong.tudong_number = 13; 
+				while(EncoderCount1 < 1535) {
+					
+					osDelay(1); 
+					
+					if(0 == mode) {
+						FEE.TuDong.tudong_number = 45; 
+						break; 
+					}								
+					
+					if(EncoderCount1 > 630 && EncoderCount1 < 700) 
+						tx_td7 = 'h'; 
+					
+					
+					goc_rb = Compass1.zAngle; 
+						
+					int tem_goc = songSongThanh(12415, FEE.H_ADC.adc_value_Result[4], 15, 90, 45, 0); 
+					
+					Swerve_4_V2(tem_goc, 15, -90, 100, 1); 					
+				}
+				
+				Stop_PID(); 
+				
+				// wait canh tay xoay xong de tha lua 
+				
+				while(comple_receiver_main_1[11] == 0) {
+					osDelay(1); 
+					
+					if(0 == mode) {
+						FEE.TuDong.tudong_number = 45; 
+						break; 
+					}										
+				}		
+				
+				enable_lai_tay_td7 = 1; 
+				
+				// wait tin hieu tay ps 
+				while(FEE_PES.TamGiac == 1) {
+					osDelay(1); 
+					if(0 == mode) {
+						FEE.TuDong.tudong_number = 45; 
+						break; 
+					}	
+				}	
+				
+				enable_lai_tay_td7 = 0; 
+				
+				tx_td7 = '6'; 
+				
+				
+				// wait tha xong 2 lua cuoi 
+				while(comple_receiver_main_1[12] == 0) {
+					osDelay(1); 
+					
+					if(0 == mode) {
+						FEE.TuDong.tudong_number = 45; 
+						break; 
+					}						
+				}
+			
+				Stop_PID(); 					
+				FEE.TuDong.tudong_number = 100; 
 			}
 			
 			/*************************** TU DONG 8 ********************************/ 
 			else if(8 == FEE.TuDong.tudong_number) {
 				
-				double tem_sick = FEE.H_ADC.adc_value_Result[5]; 
+				double tem_sick = FEE.H_ADC.adc_value_Result[0]; 
 				int16_t tem_toc_do = 60; 
 				
-				while(FEE.H_ADC.adc_value_Result[5] > 25000) {
+				while(FEE.H_ADC.adc_value_Result[0] > 25000) {
 					
 					osDelay(1); 
 					
@@ -453,10 +519,10 @@ void StartTask05(void const * argument)
 						break; 
 					}							
 					
-					if(tem_sick - FEE.H_ADC.adc_value_Result[5] > 130 || FEE.H_ADC.adc_value_Result[5] > tem_sick) {
+					if(tem_sick - FEE.H_ADC.adc_value_Result[0] > 130 || FEE.H_ADC.adc_value_Result[0] > tem_sick) {
 						if(tem_toc_do <= 90)
 							tem_toc_do++; 
-						tem_sick = FEE.H_ADC.adc_value_Result[5]; 
+						tem_sick = FEE.H_ADC.adc_value_Result[0]; 
 					}
 						
 					goc_rb = Compass1.zAngle; 
@@ -464,9 +530,9 @@ void StartTask05(void const * argument)
 				}
 				
 				int16_t tem_huong = 90;
-				tem_sick = FEE.H_ADC.adc_value_Result[5]; 
+				tem_sick = FEE.H_ADC.adc_value_Result[0]; 
 				
-				while(FEE.H_ADC.adc_value_Result[5] > 9800) {
+				while(FEE.H_ADC.adc_value_Result[0] > 9800) {
 					osDelay(1); 
 					
 					if(0 == mode) {
@@ -474,10 +540,10 @@ void StartTask05(void const * argument)
 						break; 
 					}						
 					
-					if(tem_sick - FEE.H_ADC.adc_value_Result[5] > 160 || FEE.H_ADC.adc_value_Result[5] > tem_sick) {
+					if(tem_sick - FEE.H_ADC.adc_value_Result[0] > 160 || FEE.H_ADC.adc_value_Result[0] > tem_sick) {
 						if(tem_huong <= 180)
 							tem_huong++; 
-						tem_sick = FEE.H_ADC.adc_value_Result[5]; 
+						tem_sick = FEE.H_ADC.adc_value_Result[0]; 
 					}
 						
 					goc_rb = Compass1.zAngle; 
@@ -591,10 +657,10 @@ void StartTask05(void const * argument)
 							break; 
 						}									
 						
-						if(FEE.H_ADC.adc_value_Result[5] > sick5_mong_muon || FEE.H_ADC.adc_value_Result[4] <  sick4_mong_muon) 
+						if(FEE.H_ADC.adc_value_Result[0] > sick5_mong_muon || FEE.H_ADC.adc_value_Result[0] <  sick4_mong_muon) 
 							break; 					
 						
-						canh_goc_vuong_1 = sick5_mong_muon - FEE.H_ADC.adc_value_Result[5]; 
+						canh_goc_vuong_1 = sick5_mong_muon - FEE.H_ADC.adc_value_Result[0]; 
 						canh_goc_vuong_2 = FEE.H_ADC.adc_value_Result[4] - sick4_mong_muon; 
 						
 						ti_le = canh_goc_vuong_1 / canh_goc_vuong_2; 
@@ -603,7 +669,7 @@ void StartTask05(void const * argument)
 						
 						huong_360 = huong_radian * (180 / PI); 
 						
-						if(FEE.H_ADC.adc_value_Result[5] > sick5_mong_muon || FEE.H_ADC.adc_value_Result[4] <  sick4_mong_muon) 
+						if(FEE.H_ADC.adc_value_Result[0] > sick5_mong_muon || FEE.H_ADC.adc_value_Result[4] <  sick4_mong_muon) 
 							break; 								
 						
 						osDelay(1); 
@@ -611,7 +677,7 @@ void StartTask05(void const * argument)
 						goc_rb = Compass1.zAngle; 
 						Swerve_4_V2(180 + (int)huong_360, 55, -88, 100, 1); 	
 						
-						if(FEE.H_ADC.adc_value_Result[5] > sick5_mong_muon || FEE.H_ADC.adc_value_Result[4] <  sick4_mong_muon) 
+						if(FEE.H_ADC.adc_value_Result[0] > sick5_mong_muon || FEE.H_ADC.adc_value_Result[4] <  sick4_mong_muon) 
 							break; 					
 					
 					}

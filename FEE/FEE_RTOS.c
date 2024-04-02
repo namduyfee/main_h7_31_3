@@ -141,6 +141,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			if(0 == comple_receiver_main_1[11]) 
 				comple_receiver_main_1[11] = 1;					
 			
+		// tha xong 2 lua cuoi 	
+		if(FEE.Main_Phu_1.rxBuffer[0] == '6') 
+			if(0 == comple_receiver_main_1[12]) 
+				comple_receiver_main_1[12] = 1;
+		
 			
 		if(FEE.Main_Phu_1.rxBuffer[0] == '^') {
 			if(0 == comple_receiver_main_1[18]) {

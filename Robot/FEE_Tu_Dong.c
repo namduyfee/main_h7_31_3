@@ -18,7 +18,7 @@
 
 extern uint8_t mode; 
 extern int EncoderCount1; 
-
+extern FEE_MOTOR DC1, DC2, DC3, DC4, DC5, DC6, DC7, DC8, DC9, DC10;
 
 
 //extern uint8_t tx_td7; 
@@ -32,6 +32,10 @@ extern int16_t goc_rb;
 
 
 int khoi_tao = 0; 
+int tdc_low_td7 = 8; 
+
+extern int8_t stop;
+extern uint8_t mode_ve_VT;
 
 void FEE_TuDong_Init(void) {
 	int pc8; 
@@ -661,3 +665,185 @@ void ap_thanh_lay_bong(void) {
 //		Swerve_4_V2(tem_goc_td7, 15, -88, 100, 1); 
 //	}
 //}
+
+
+void nut_lai_tay_td7_san_do(void) {	
+		
+//  toc do cham 
+		
+		if(FEE_PES.Tron==0 && FEE_PES.Down&&FEE_PES.Vuong&&FEE_PES.Up&&FEE_PES.TamGiac&&FEE_PES.X&&!mode_ve_VT)
+		{
+			encoder_di_thang(); 
+			stop = 0; 
+			reset_encoder(); 
+			int tem_encoder_tien = 20; 
+			
+			while(1) {
+				
+				osDelay(1); 
+				
+				if(0 == mode) {
+					FEE.TuDong.tudong_number = 45; 
+					break; 
+				}				
+				
+				if( (tem_encoder_tien - EncoderCount1 < 0) || (EncoderCount1 + tem_encoder_tien < 0) ) 
+					break; 
+				
+				goc_rb = Compass1.zAngle; 
+				
+				int tem_goc = songSongThanh(12415, FEE.H_ADC.adc_value_Result[4], 15, 90, 45, 0); 
+						
+				Swerve_4_V2(270, tdc_low_td7, -89, 100, 1); 
+				
+			}
+			
+		}	
+		
+		else if(FEE_PES.Vuong==0 &&FEE_PES.Up&&FEE_PES.Down&&FEE_PES.Tron&&FEE_PES.TamGiac&&FEE_PES.X&&!mode_ve_VT)
+		{
+			encoder_di_thang(); 
+			stop = 0; 
+			reset_encoder(); 
+			int tem_encoder_lui = 20; 
+			
+			while(1) {
+				
+				osDelay(1); 
+				
+				if(0 == mode) {
+					FEE.TuDong.tudong_number = 45; 
+					break; 
+				}				
+				
+				if( (tem_encoder_lui - EncoderCount1 < 0) || (EncoderCount1 + tem_encoder_lui < 0) ) 
+					break; 
+				
+				goc_rb = Compass1.zAngle; 
+				
+				int tem_goc = songSongThanh(12415, FEE.H_ADC.adc_value_Result[4], 15, 90, 45, 0); 
+						
+				Swerve_4_V2(90, tdc_low_td7, -89, 100, 1); 
+			}
+		}
+		
+		else if(FEE_PES.Up==0&&FEE_PES.Vuong&&FEE_PES.Down&&FEE_PES.Tron&&FEE_PES.TamGiac&&FEE_PES.X&&!mode_ve_VT)
+		{
+			
+			encoder_di_ngang(); 
+			stop = 0; 
+			reset_encoder(); 
+			int tem_encoder_trai = 20; 
+			
+			while(1) {
+				
+				osDelay(1); 
+				
+				if(0 == mode) {
+					FEE.TuDong.tudong_number = 45; 
+					break; 
+				}				
+				
+				if( (tem_encoder_trai - EncoderCount1 < 0) || (EncoderCount1 + tem_encoder_trai < 0) ) 
+					break; 
+				
+				goc_rb = Compass1.zAngle; 
+				
+				int tem_goc = songSongThanh(12415, FEE.H_ADC.adc_value_Result[4], 15, 90, 45, 0); 
+						
+				Swerve_4_V2(180, tdc_low_td7, -89, 100, 1); 
+			}
+		}
+		
+		
+		else 	if(FEE_PES.Down==0&&FEE_PES.Up&&FEE_PES.Tron&&FEE_PES.Vuong&&FEE_PES.TamGiac&&FEE_PES.X&&!mode_ve_VT)
+		{
+			encoder_di_ngang(); 
+			stop = 0; 
+			reset_encoder(); 
+			int tem_encoder_phai = 20; 
+			
+			while(1) {
+				
+				osDelay(1); 
+				
+				if(0 == mode) {
+					FEE.TuDong.tudong_number = 45; 
+					break; 
+				}				
+				
+				if( (tem_encoder_phai - EncoderCount1 < 0) || (EncoderCount1 + tem_encoder_phai < 0) ) 
+					break; 
+				
+				goc_rb = Compass1.zAngle; 
+				
+				int tem_goc = songSongThanh(12415, FEE.H_ADC.adc_value_Result[4], 15, 90, 45, 0); 
+						
+				Swerve_4_V2(0, tdc_low_td7, -89, 100, 1); 
+			}
+		}			
+		
+		else if(FEE_PES.TamGiac == 0&&FEE_PES.Down&&FEE_PES.Up&&FEE_PES.Tron&&FEE_PES.Vuong&&FEE_PES.X&&!mode_ve_VT)
+		{
+
+			int goc_xoay = Compass1.zAngle; 
+			
+			while(1) {
+				
+				osDelay(1); 
+				
+				if(0 == mode) {
+					FEE.TuDong.tudong_number = 45; 
+					break; 
+				}		
+				
+				goc_rb = Compass1.zAngle; 
+				
+				if( ((goc_rb - goc_xoay) + 4 ) < 0 || ((goc_rb - goc_xoay) - 4 < 0) ) 
+					break; 
+				Swerve_4_V2_laitay(Compass1.zAngle,0, Compass1.zAngle - 360,3); 
+			}
+		}			
+		
+		
+		
+		else if(FEE_PES.X==0&&FEE_PES.Down&&FEE_PES.Up&&FEE_PES.Tron&&FEE_PES.Vuong&&FEE_PES.TamGiac&&!mode_ve_VT)
+		{
+
+			int goc_xoay = Compass1.zAngle; 
+			
+			while(1) {
+				
+				osDelay(1); 
+				
+				if(0 == mode) {
+					FEE.TuDong.tudong_number = 45; 
+					break; 
+				}		
+				
+				goc_rb = Compass1.zAngle; 
+				
+				if( ((goc_rb - goc_xoay) + 4 ) < 0 || ((goc_rb - goc_xoay) - 4 < 0) ) 
+					break; 
+				Swerve_4_V2_laitay(Compass1.zAngle,0, Compass1.zAngle + 360,3); 
+			}
+		}	
+
+		else
+		{	
+			if(stop==0)
+			{
+				Stop_PID();
+				stop = 1;
+			}
+			else
+			{
+				DC1.Speed = 0;
+				DC2.Speed = 0;
+				DC3.Speed = 0;
+				DC4.Speed = 0;
+			}
+			ve_vt();
+		}
+	
+}
