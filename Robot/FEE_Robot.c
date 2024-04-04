@@ -177,12 +177,12 @@ void nut_lai_tay(void) {
 		else if (FEE_PES_Js.left_R==0&&FEE_PES.Up&&FEE_PES.Down&&FEE_PES.Vuong&&FEE_PES.Tron&&FEE_PES_Js.right_R&&!mode_ve_VT)
 		{	
 			stop = 0;			
-			Swerve_4_V2_laitay(Compass1.zAngle,0,Compass1.zAngle + 360,10);    
+			Swerve_4_V2_laitay(0,0,0 + 360,10);    
 		}
 		else if (FEE_PES_Js.right_R==0&&FEE_PES.Up&&FEE_PES.Down&&FEE_PES.Vuong&&FEE_PES.Tron&&FEE_PES_Js.left_R&&!mode_ve_VT)
 		{
 			stop = 0;
-			Swerve_4_V2_laitay(Compass1.zAngle,0, Compass1.zAngle - 360,10);    
+			Swerve_4_V2_laitay(0,0, 0 - 360,10);    
 		}
 
 		else

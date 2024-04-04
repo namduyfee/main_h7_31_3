@@ -65,6 +65,8 @@ uint8_t enable_lai_tay_td7 = 0; 										// 1 : cho phep lai tay 0 ; la ko dc l
 //uint8_t tem_break_td7; 
 //uint8_t tem_reset_encoder_td7; 
 /************************* TDD6 ***************************************/ 
+uint8_t tx_td6; 
+uint8_t enable_trans_td6 = 0; 
 uint16_t tem_huong_di_chuyen_td6 = 0; 
 uint16_t tem_toc_do_danh_td6 = 0; 
 uint8_t check_tem_huong_di_chuyen_td6 = 0; 
@@ -253,6 +255,7 @@ void StartTask05(void const * argument)
 			
 			else if(6 == FEE.TuDong.tudong_number) {
 				
+				
 				FEE.TuDong.enable_count = 1; 
 				
 				if(tem_en == 0) {
@@ -290,6 +293,13 @@ void StartTask05(void const * argument)
 				if(goc_rb < -30) 
 					day_tay_tha_lua(); 
 				
+				if(goc_rb < -80) {
+					tx_td6 = 'M'; 
+					enable_trans_td6 = 1; 
+					FEE.TuDong.done_tudong_main1[5] = 1; 
+				}
+					
+				
 				if(goc_rb > -86 && check_tem_huong_di_chuyen_td6 == 0) {
 					tem_huong_di_chuyen_td6 = 205; 
 					tem_toc_do_danh_td6 = 40; 
@@ -319,13 +329,16 @@ void StartTask05(void const * argument)
 				int limit_duoi_encoder; 
 				int limit_tren_encoder; 
 				
-				encoder_di_thang(); 
+				
 				
 				uint8_t flag_thu_tay_tha_lua = 0; 
 				
 				int tem_toc_do_song_song_thanh = 15; 
 				
 				while(step_number_td7 < 6) {
+					
+					encoder_di_thang(); 
+					
 					osDelay(1);
 					
 					tem_toc_do_song_song_thanh = 15; 
@@ -340,8 +353,8 @@ void StartTask05(void const * argument)
 						limit_tren_encoder = 300; 
 					}
 					else {
-						limit_duoi_encoder = 500; 
-						limit_tren_encoder = 600; 						
+						limit_duoi_encoder = 800; 
+						limit_tren_encoder = 900; 						
 					}
 					
 					reset_encoder(); 
@@ -402,7 +415,7 @@ void StartTask05(void const * argument)
 						
 						enable_lai_tay_td7 = 1; 
 						
-						while(FEE_PES.TamGiac == 1) {
+						while(FEE_PES.Left == 1) {
 							osDelay(1); 
 							if(0 == mode) {
 								FEE.TuDong.tudong_number = 45; 
@@ -438,19 +451,20 @@ void StartTask05(void const * argument)
 				
 				// di encoder tha 2 lua cuoi 
 				
-				encoder_di_thang(); 
 				reset_encoder(); 
 
 				while(EncoderCount1 < 1535) {
 					
 					osDelay(1); 
 					
+					encoder_di_thang(); 
+					
 					if(0 == mode) {
 						FEE.TuDong.tudong_number = 45; 
 						break; 
 					}								
 					
-					if(EncoderCount1 > 630 && EncoderCount1 < 700) 
+					if(EncoderCount1 > 800 && EncoderCount1 < 900) 
 						tx_td7 = 'h'; 
 					
 					
@@ -477,7 +491,7 @@ void StartTask05(void const * argument)
 				enable_lai_tay_td7 = 1; 
 				
 				// wait tin hieu tay ps 
-				while(FEE_PES.TamGiac == 1) {
+				while(FEE_PES.Left == 1) {
 					osDelay(1); 
 					if(0 == mode) {
 						FEE.TuDong.tudong_number = 45; 

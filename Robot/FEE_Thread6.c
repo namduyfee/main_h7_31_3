@@ -41,6 +41,10 @@ extern uint8_t tem_trang_thai_td7;
 extern int8_t step_number_td7; 
 extern uint8_t enable_send_td7; 
 extern uint8_t tx_td7; 
+
+extern uint8_t tx_td6; 
+extern uint8_t enable_trans_td6; 
+
 extern uint8_t tx_td5; 
 
 /* USER CODE BEGIN Header_StartTask06 */
@@ -88,6 +92,9 @@ void StartTask06(void const * argument)
 								
 								else if (5 == FEE.TuDong.tudong_number) 
 									FEE_Main_Phu_Send(1, 'c'); 
+								
+								else if (6 == FEE.TuDong.tudong_number && enable_trans_td6 == 1) 
+									FEE_Main_Phu_Send(1, tx_td6); 								
 								
 								else if(7 == FEE.TuDong.tudong_number && enable_send_td7 == 1)
 									FEE_Main_Phu_Send(1, tx_td7); 
